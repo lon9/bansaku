@@ -1,0 +1,6 @@
+gom 'github.com/bradfitz/http2'
+gom 'github.com/bradfitz/http2/hpack'
+gom 'github.com/labstack/echo'
+gom 'github.com/labstack/echo/middleware'
+gom 'github.com/labstack/gommon/color'
+gom 'golang.org/x/net/websocket'

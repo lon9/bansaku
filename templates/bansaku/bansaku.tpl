@@ -3,7 +3,7 @@
 
 {% block content %}
 <div data-bind="with: bansaku">
-万策尽きた〜:<span data-bind="text: count"></span>
+<h1 data-bind="text: count">
 </div>
 <button type="button" data-bind="click: send.bind(this)">万策尽きた〜</button>
 {% endblock content %}

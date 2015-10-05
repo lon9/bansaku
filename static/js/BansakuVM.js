@@ -17,8 +17,6 @@ define(
 
         ws.onmessage = function(e){
           var model = $.evalJSON(e.data);
-          console.log(model);
-          //var bansaku = new Bansaku(model);
           that.bansaku(model);
         };
       }

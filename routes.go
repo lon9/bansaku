@@ -37,5 +37,19 @@ func NewRoutes() Routes {
 	bansaku.WebSocket("/ws", server.BansakuSocketHandler())
 	routes["bansaku.localhost:8080"] = bansaku
 
+	blog := echo.New()
+	blog.Use(mw.Logger())
+	blog.Use(mw.Recover())
+	blog.SetDebug(true)
+	blog.Static("/js", "blog/public/js")
+	blog.Static("/css", "blog/public/css")
+	blog.Static("/images", "blog/public/images")
+	blog.Static("/font", "blog/public/font")
+	blog.Static("/categories", "blog/public/categories")
+	blog.Static("/page", "blog/public/page")
+	blog.Static("/tags", "blog/public/tags")
+	blog.Index("blog/public/index.html")
+	routes["blog.localhost:8080"] = blog
+
 	return routes
 }

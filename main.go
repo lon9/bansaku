@@ -6,5 +6,5 @@ import (
 
 func main() {
 	routes := NewRoutes()
-	http.ListenAndServe(":1323", routes)
+	http.ListenAndServe(":8080", routes)
 }

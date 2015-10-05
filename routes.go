@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Rompei/zepher/controllers"
+	"github.com/ipfans/echo-pongo2"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 	"net/http"
@@ -23,12 +24,18 @@ func NewRoutes() Routes {
 	routes := make(Routes)
 
 	bansaku := echo.New()
+	bansaku.Static("/js", "static/js")
+	bansaku.Static("/sound", "static/sound")
 	bansaku.Use(mw.Logger())
 	bansaku.Use(mw.Recover())
+	bansaku.Use(pongo2.Pongo2())
 	// Debug
 	bansaku.SetDebug(true)
+	server := controllers.NewBansakuServer()
+	go server.Start()
 	bansaku.Get("/", controllers.BansakuIndex)
-	routes["bansaku.localhost:1323"] = bansaku
+	bansaku.WebSocket("/ws", server.BansakuSocketHandler())
+	routes["bansaku.localhost:8080"] = bansaku
 
 	return routes
 }

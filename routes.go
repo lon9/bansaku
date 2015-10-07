@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Rompei/zepher-bansaku/controllers"
+	"github.com/Rompei/zepher/zepher-bansaku/controllers"
 	"github.com/ipfans/echo-pongo2"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
@@ -11,7 +11,9 @@ import (
 func NewRoutes() *echo.Echo {
 	bansaku := echo.New()
 	bansaku.Static("/js", "static/js")
+	bansaku.Static("/css", "static/css")
 	bansaku.Static("/sound", "static/sound")
+	bansaku.Static("/font", "static/font")
 	bansaku.Use(mw.Logger())
 	bansaku.Use(mw.Recover())
 	bansaku.Use(pongo2.Pongo2())

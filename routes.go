@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Rompei/zepher/zepher-bansaku/controllers"
+	"github.com/Rompei/zepher-bansaku/controllers"
 	"github.com/ipfans/echo-pongo2"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"

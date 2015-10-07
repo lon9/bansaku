@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/Rompei/zepher/zepher-bansaku/db"
-	"github.com/Rompei/zepher/zepher-bansaku/models"
+	"github.com/Rompei/zepher-bansaku/db"
+	"github.com/Rompei/zepher-bansaku/models"
 	"github.com/garyburd/redigo/redis"
 	"github.com/labstack/echo"
 	"golang.org/x/net/websocket"

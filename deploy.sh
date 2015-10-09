@@ -13,6 +13,9 @@ if [ $NGINX = "" ]; then
   exit 1
 fi
 
+echo "Getting sources..."
+go get -v github.com/Rompei/zepher-bansaku
+
 echo "Stopping app server..."
 killall zepher-bansaku
 
@@ -36,4 +39,4 @@ sudo nginx
 
 echo "Starting app server..."
 cd $HOME/www/zepher-bansaku 
-nohub ./zepher-bansaku &
+nohup ./zepher-bansaku &

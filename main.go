@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/facebookgo/grace/gracehttp"
+	"github.com/tylerb/graceful"
+	"time"
 )
 
 func main() {
 	routes := NewRoutes()
-	gracehttp.Serve(routes.Server(":8080"))
+	graceful.ListenAndServe(routes.Server(":8080"), 5*time.Second)
 }

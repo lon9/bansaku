@@ -13,11 +13,12 @@ if [ $NGINX = "" ]; then
   exit 1
 fi
 
+echo "Stopping app server..."
+killall zepher-bansaku
+
 echo "Stopping nginx..."
 sudo nginx -s stop
 
-echo "Stopping app server..."
-killall zepher-bansaku
 
 cd $SCRIPT_DIR
 pwd
@@ -30,9 +31,9 @@ if [ -e $HOME/www/zepher-bansaku ]; then
 fi
 cp zepher-bansaku $HOME/www/zepher-bansaku/
 
+echo "Starting nginx..."
+sudo nginx
+
 echo "Starting app server..."
 cd $HOME/www/zepher-bansaku 
 ./zepher-bansaku &
-
-echo "Starting nginx..."
-sudo nginx

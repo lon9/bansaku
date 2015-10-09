@@ -14,7 +14,7 @@ if [ $NGINX = "" ]; then
 fi
 
 echo "Getting sources..."
-go get -v github.com/Rompei/zepher-bansaku
+go get -v -u github.com/Rompei/zepher-bansaku
 
 echo "Stopping app server..."
 killall zepher-bansaku

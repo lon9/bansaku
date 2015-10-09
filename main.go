@@ -1,10 +1,10 @@
 package main
 
 import (
-	"net/http"
+	"github.com/facebookgo/grace/gracehttp"
 )
 
 func main() {
 	routes := NewRoutes()
-	http.ListenAndServe(":8080", routes)
+	gracehttp.Serve(routes.Server(":8080"))
 }

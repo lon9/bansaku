@@ -32,7 +32,7 @@ echo "Copy to www directory"
 if [ -e $HOME/www/zepher-bansaku ]; then
   mkdir -p $HOME/www/zepher-bansaku
 fi
-cp zepher-bansaku $HOME/www/zepher-bansaku/
+cp . $HOME/www/zepher-bansaku/
 
 echo "Starting nginx..."
 sudo nginx

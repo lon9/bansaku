@@ -16,6 +16,9 @@ fi
 echo "Stopping nginx..."
 sudo nginx -s stop
 
+echo "Stopping app server..."
+killall zepher-bansaku
+
 cd $SCRIPT_DIR
 pwd
 echo "Building src..."

@@ -36,4 +36,4 @@ sudo nginx
 
 echo "Starting app server..."
 cd $HOME/www/zepher-bansaku 
-./zepher-bansaku &
+nohub ./zepher-bansaku &

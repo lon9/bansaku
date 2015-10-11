@@ -14,7 +14,7 @@ define(
         multiplay: true,
         volume: 0.6
       });
-      var ws = new WebSocket("ws://localhost:60000/ws");
+      var ws = new WebSocket("ws://"+location.host+"/ws");
       var bansakuVM = new BansakuVM(ws);
       ko.applyBindings(bansakuVM);
     }

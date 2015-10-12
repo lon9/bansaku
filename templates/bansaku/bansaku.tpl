@@ -1,4 +1,4 @@
-{% extends "base.tpl" %}
+{% extends "../base.tpl" %}
 {% block title %}万策つきたボタン{% endblock %}
 {% block extrahead %}
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">

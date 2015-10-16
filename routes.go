@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Rompei/zepher-bansaku/controllers"
-	"github.com/ipfans/echo-pongo2"
+	p "github.com/Rompei/zepher-bansaku/libs"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 )
@@ -16,13 +16,23 @@ func NewRoutes() *echo.Echo {
 	bansaku.Static("/font", "static/font")
 	bansaku.Use(mw.Logger())
 	bansaku.Use(mw.Recover())
-	bansaku.Use(pongo2.Pongo2())
+	//bansaku.Use(pongo2.Pongo2())
+	t := p.PrepareTemplates(p.Options{
+		Directory:  "templates/",
+		Extensions: []string{".tpl"},
+	})
+	bansaku.SetRenderer(t)
+
 	// Debug
 	bansaku.SetDebug(true)
 	server := controllers.NewBansakuServer()
 	go server.Start()
 	bansaku.Get("/", controllers.BansakuIndex)
 	bansaku.WebSocket("/ws", server.BansakuSocketHandler())
+
+	// API
+	api := bansaku.Group("/api")
+	api.Get("/", controllers.APIBansakuGetHandler)
 
 	return bansaku
 }

@@ -6,12 +6,13 @@ import (
 	"github.com/garyburd/redigo/redis"
 	"github.com/labstack/echo"
 	"golang.org/x/net/websocket"
+	"net/http"
 )
 
 // BansakuIndex is root of Bansaku button
 func BansakuIndex(c *echo.Context) error {
-	c.Set("template", "bansaku/bansaku.tpl")
-	return nil
+	data := make(map[string]interface{})
+	return c.Render(http.StatusOK, "bansaku", data)
 }
 
 // BansakuClient is client of bansaku

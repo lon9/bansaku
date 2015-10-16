@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Rompei/zepher-bansaku/controllers"
-	p "github.com/easykoo/echo-pongo2"
+	p "github.com/Rompei/zepher-bansaku/libs"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 )

@@ -23,13 +23,13 @@ sudo nginx -s stop
 echo "Getting sources..."
 go get -v -u github.com/Rompei/zepher-bansaku
 
-cd $SCRIPT_DIR
-echo "Building src..."
-$GO_PATH build
-
 cd $SCRIPT_DIR/workers/backup/
 echo "installing node dependencies..."
 $NPM_PATH install
+
+cd $SCRIPT_DIR
+echo "Building src..."
+$GO_PATH build
 
 echo "Copy to www directory"
 if [ -e $HOME/www/zepher-bansaku ]; then
@@ -38,6 +38,7 @@ if [ -e $HOME/www/zepher-bansaku ]; then
 else
   mkdir -p $HOME/www/zepher-bansaku
 fi
+
 cp -r $SCRIPT_DIR/* $HOME/www/zepher-bansaku/
 
 echo "Starting nginx..."

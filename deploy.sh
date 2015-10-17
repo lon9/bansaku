@@ -2,6 +2,7 @@
 
 SCRIPT_DIR=`dirname $0`
 GO_PATH=`which go`
+NPM_PATH=`which npm`
 NGINX=`which nginx`
 if [ $GO_PATH = "" ]; then
   echo "Go is not installed."
@@ -13,20 +14,22 @@ if [ $NGINX = "" ]; then
   exit 1
 fi
 
-echo "Getting sources..."
-go get -v -u github.com/Rompei/zepher-bansaku
-
 echo "Stopping app server..."
 killall zepher-bansaku
 
 echo "Stopping nginx..."
 sudo nginx -s stop
 
+echo "Getting sources..."
+go get -v -u github.com/Rompei/zepher-bansaku
 
 cd $SCRIPT_DIR
-pwd
 echo "Building src..."
 $GO_PATH build
+
+cd $SCRIPT_DIR/workers/backup/
+echo "installing node dependencies..."
+$NPM_PATH install
 
 echo "Copy to www directory"
 if [ -e $HOME/www/zepher-bansaku ]; then

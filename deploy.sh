@@ -33,6 +33,9 @@ $NPM_PATH install
 
 echo "Copy to www directory"
 if [ -e $HOME/www/zepher-bansaku ]; then
+  rm -rf $HOME/www/zepher-bansaku
+  mkdir -p $HOME/www/zepher-bansaku
+else
   mkdir -p $HOME/www/zepher-bansaku
 fi
 cp -r $SCRIPT_DIR/* $HOME/www/zepher-bansaku/

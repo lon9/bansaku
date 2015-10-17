@@ -23,9 +23,8 @@ sudo nginx -s stop
 echo "Getting sources..."
 go get -v -u github.com/Rompei/zepher-bansaku
 
-cd $SCRIPT_DIR/workers/backup/
 echo "installing node dependencies..."
-$NPM_PATH install
+$NPM_PATH --prefix ./worker/backup install ./worker/backup
 
 cd $SCRIPT_DIR
 echo "Building src..."

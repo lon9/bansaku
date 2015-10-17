@@ -24,7 +24,7 @@ echo "Getting sources..."
 go get -v -u github.com/Rompei/zepher-bansaku
 
 echo "installing node dependencies..."
-$NPM_PATH --prefix ./worker/backup install ./worker/backup
+$NPM_PATH --prefix ./workers/backup install ./workers/backup
 
 cd $SCRIPT_DIR
 echo "Building src..."

@@ -14,6 +14,11 @@ if [ $NGINX = "" ]; then
   exit 1
 fi
 
+if [ $NPM_PATH = "" ]; then
+  echo "npm is not installed."
+  exit 1
+fi
+
 echo "Stopping app server..."
 killall zepher-bansaku
 

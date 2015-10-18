@@ -11,7 +11,7 @@ import (
 func NewRoutes() *echo.Echo {
 	bansaku := echo.New()
 	bansaku.Static("/js", "static/js")
-	bansaku.Static("/css", "static/css/bansakucss")
+	bansaku.Static("/css", "static/css/bansaku")
 	bansaku.Static("/sound", "static/sound")
 	bansaku.Static("/font", "static/font")
 	bansaku.Use(mw.Logger())

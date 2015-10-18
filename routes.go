@@ -11,7 +11,7 @@ import (
 func NewRoutes() *echo.Echo {
 	bansaku := echo.New()
 	bansaku.Static("/js", "static/js")
-	bansaku.Static("/css", "static/css")
+	bansaku.Static("/css", "static/css/bansaku")
 	bansaku.Static("/sound", "static/sound")
 	bansaku.Static("/font", "static/font")
 	bansaku.Use(mw.Logger())
@@ -32,7 +32,9 @@ func NewRoutes() *echo.Echo {
 
 	// API
 	api := bansaku.Group("/api")
-	api.Get("/", controllers.APIBansakuGetHandler)
+	api.Static("/css", "static/css/api")
+	api.Get("/", controllers.APIReferenceHandler)
+	api.Get("/count", controllers.APIBansakuGetHandler)
 
 	return bansaku
 }

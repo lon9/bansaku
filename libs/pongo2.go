@@ -58,7 +58,7 @@ func readDirs(path string, ext []string, templates map[string]*pongo2.Template) 
 	for _, fileInfo := range fileInfos {
 		// If fileInfo is directory, recurse the directory
 		if fileInfo.IsDir() {
-			return readDirs(filepath.Join(dirPath, fileInfo.Name())+"/", ext, templates)
+			readDirs(filepath.Join(dirPath, fileInfo.Name())+"/", ext, templates)
 		}
 		for _, s := range ext {
 			if isMatched, _ := regexp.MatchString(".*"+s+"$", fileInfo.Name()); isMatched {

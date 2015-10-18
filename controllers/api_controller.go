@@ -14,6 +14,11 @@ const (
 	ReachedRateLimit = 900
 )
 
+// APIReferenceHandler is reference of Bansaku API.
+func APIReferenceHandler(c *echo.Context) error {
+	return c.Render(http.StatusOK, "reference", make(map[string]interface{}))
+}
+
 // APIBansakuGetHandler returns count of Bansaku
 func APIBansakuGetHandler(c *echo.Context) error {
 	con := db.GetRedis()

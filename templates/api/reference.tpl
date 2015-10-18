@@ -1,5 +1,5 @@
 {% extends "../base.tpl" %}
-{% block title %}万策つきたボタン{% endblock %}
+{% block title %}万策つきたボタン リファレンス{% endblock %}
 {% block extrahead %}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
 {% endblock %}
@@ -11,6 +11,6 @@
   <h5>レートリミット</h5>
   <p>10 request / 1 second</p>
   <h5>万策回数取得</h5>
-  <pre><code>https://bansaku.zepher.me/api/count/</code></pre>
+  <pre><code>http://bansaku.zepher.me/api/count</code></pre>
 </div>
 {% endblock content %}

@@ -35,26 +35,35 @@ func APIBansakuGetHandler(c *echo.Context) error {
 	return c.JSON(http.StatusOK, &bansaku)
 }
 
+// Checking rate limit 10 request / 1 sec.
 func checkRateLimit(con redis.Conn, c *echo.Context) bool {
 	ip, _, err := net.SplitHostPort(c.Request().RemoteAddr)
 	if err != nil {
 		panic(err)
 	}
+
+	//If list of ip address's length is 10 retun false.
 	current, err := redis.Int(con.Do("LLEN", ip))
 	if err == nil && current > 10 {
 		return false
 	}
-	_, err = redis.Bool(con.Do("EXISTS", "ip"))
+	exists, err := redis.Bool(con.Do("EXISTS", ip))
 	if err != nil {
+		panic(err)
+	}
+	if !exists {
 		con.Send("MULTI")
-		con.Send("RPUSH", "ip", ip)
-		con.Send("EXPIRE", "ip", 1)
+		con.Send("RPUSH", ip, ip)
+		con.Send("EXPIRE", ip, 10)
 		_, err := con.Do("EXEC")
 		if err != nil {
 			panic(err)
 		}
 	} else {
-		con.Do("RPUSHX", "ip", ip)
+		_, err := con.Do("RPUSHX", ip, ip)
+		if err != nil {
+			panic(err)
+		}
 	}
 	return true
 }

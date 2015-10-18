@@ -54,7 +54,7 @@ func checkRateLimit(con redis.Conn, c *echo.Context) bool {
 	if !exists {
 		con.Send("MULTI")
 		con.Send("RPUSH", ip, ip)
-		con.Send("EXPIRE", ip, 10)
+		con.Send("EXPIRE", ip, 1)
 		_, err := con.Do("EXEC")
 		if err != nil {
 			panic(err)

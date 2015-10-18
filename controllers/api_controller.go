@@ -9,9 +9,22 @@ import (
 	"net/http"
 )
 
+const (
+	// ReachedRateLimit is message, when reach api's rate limit.
+	ReachedRateLimit = 900
+)
+
 // APIBansakuGetHandler returns count of Bansaku
 func APIBansakuGetHandler(c *echo.Context) error {
 	con := db.GetRedis()
+	defer con.Close()
+	if !checkRateLimit(con, c) {
+		err := models.Error{
+			Code:    ReachedRateLimit,
+			Message: "Reached rate limit.",
+		}
+		return c.JSON(http.StatusBadRequest, err)
+	}
 	count, err := redis.Int64(con.Do("get", "count"))
 	if err != nil {
 		count = 0
@@ -44,5 +57,4 @@ func checkRateLimit(con redis.Conn, c *echo.Context) bool {
 		con.Do("RPUSHX", "ip", ip)
 	}
 	return true
-
 }

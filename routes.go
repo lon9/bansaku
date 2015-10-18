@@ -32,7 +32,8 @@ func NewRoutes() *echo.Echo {
 
 	// API
 	api := bansaku.Group("/api")
-	api.Get("/", controllers.APIBansakuGetHandler)
+	api.Get("/", controllers.APIReferenceHandler)
+	api.Get("/count", controllers.APIBansakuGetHandler)
 
 	return bansaku
 }

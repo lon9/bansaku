@@ -16,7 +16,6 @@ func NewRoutes() *echo.Echo {
 	bansaku.Static("/font", "static/font")
 	bansaku.Use(mw.Logger())
 	bansaku.Use(mw.Recover())
-	//bansaku.Use(pongo2.Pongo2())
 	t := p.PrepareTemplates(p.Options{
 		Directory:  "templates/",
 		Extensions: []string{".tpl"},

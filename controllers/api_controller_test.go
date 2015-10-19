@@ -1,15 +1,26 @@
-package test
+package controllers
 
 import (
+	p "github.com/Rompei/zepher-bansaku/libs"
 	"github.com/bitly/go-simplejson"
+	"github.com/labstack/echo"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
-func Test_APIReferenceHandler(t *testing.T) {
-	router := NewRouter()
+func TestAPIReferenceHandler(t *testing.T) {
+	router := echo.New()
+	router.Static("/css", "static/css/api")
+	tmp := p.PrepareTemplates(p.Options{
+		Directory:  "../templates/",
+		Extensions: []string{".tpl"},
+	})
+	router.SetRenderer(tmp)
+
+	router.Get("/api/", APIReferenceHandler)
+
 	ts := httptest.NewServer(router)
 	defer ts.Close()
 
@@ -23,8 +34,16 @@ func Test_APIReferenceHandler(t *testing.T) {
 
 }
 
-func Test_APIBansakuGetHandler(t *testing.T) {
-	router := NewRouter()
+func TestAPIBansakuGetHandler(t *testing.T) {
+	router := echo.New()
+	router.Static("/css", "static/css/api")
+	tmp := p.PrepareTemplates(p.Options{
+		Directory:  "../templates/",
+		Extensions: []string{".tpl"},
+	})
+	router.SetRenderer(tmp)
+
+	router.Get("/api/count", APIBansakuGetHandler)
 	ts := httptest.NewServer(router)
 	defer ts.Close()
 

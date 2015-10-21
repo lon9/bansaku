@@ -116,15 +116,15 @@ func (server *BansakuServer) Start() {
 			server.removeClient(client)
 		case <-server.bansakuCh:
 			c := db.GetRedis()
-			count, err := redis.Int64(c.Do("get", "count"))
+			c.Send("MULTI")
+			c.Send("INCR", "count")
+			v, err := redis.Values(c.Do("EXEC"))
 			if err != nil {
-				count = 1
-			} else {
-				count++
+				panic(err)
 			}
-			c.Do("set", "count", count)
+
 			bansakuCount := models.Bansaku{
-				Count: count,
+				Count: v[0].(int64),
 			}
 			server.sendCount(&bansakuCount)
 		}

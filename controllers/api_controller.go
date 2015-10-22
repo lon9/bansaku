@@ -21,16 +21,16 @@ func APIReferenceHandler(c *echo.Context) error {
 
 // APIBansakuGetHandler returns count of Bansaku
 func APIBansakuGetHandler(c *echo.Context) error {
-	con := db.GetRedis()
-	defer con.Close()
-	if !checkRateLimit(con, c) {
+	r := db.GetInstance()
+	//defer con.Close()
+	if !checkRateLimit(r.Con, c) {
 		err := models.Error{
 			Code:    ReachedRateLimit,
 			Message: "Reached rate limit.",
 		}
 		return c.JSON(http.StatusBadRequest, err)
 	}
-	count, err := redis.Int64(con.Do("get", "count"))
+	count, err := redis.Int64(r.Con.Do("get", "count"))
 	if err != nil {
 		count = 0
 	}

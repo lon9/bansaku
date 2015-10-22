@@ -83,8 +83,8 @@ func (server *BansakuServer) addClient(client *BansakuClient) {
 	client.ID = server.clientCount
 	server.clients[client.ID] = client
 
-	c := db.GetRedis()
-	count, err := redis.Int64(c.Do("get", "count"))
+	r := db.GetInstance()
+	count, err := redis.Int64(r.Con.Do("get", "count"))
 	if err != nil {
 		count = 0
 	}
@@ -115,10 +115,10 @@ func (server *BansakuServer) Start() {
 		case client := <-server.removeClientCh:
 			server.removeClient(client)
 		case <-server.bansakuCh:
-			c := db.GetRedis()
-			c.Send("MULTI")
-			c.Send("INCR", "count")
-			v, err := redis.Values(c.Do("EXEC"))
+			r := db.GetInstance()
+			r.Con.Send("MULTI")
+			r.Con.Send("INCR", "count")
+			v, err := redis.Values(r.Con.Do("EXEC"))
 			if err != nil {
 				panic(err)
 			}
